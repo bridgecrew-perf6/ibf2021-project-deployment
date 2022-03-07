@@ -1,0 +1,104 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid col-10">
+        <span class="navbar-brand"><i class="navbar-brand bi-coin"></i>Coin Twitter</span>
+        <button class="btn btn-outline-light me-2" type="button" [hidden]="username == ''">{{username}}</button>
+  </div>
+</nav>
+<div class="container-fluid">
+  <div class="row d-flex justify-content-center">
+    <div class="col-10">
+      <div id="subscription">
+        <h4 class="mt-5 mb-3">Subscriptions</h4>
+        <table class="table table-hover">
+          <thead class="table-dark">
+            <tr>
+              <!-- <th scope="col">#</th> -->
+              <th scope="col">Tag</th>
+              <th scope="col">Description</th>
+              <th scope="col">Email Notification</th>
+              <th scope="col">Auto Trade</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let subscription of subscriptions; index as i">
+              <!-- <th scope="row">{{i + 1}}</th> -->
+              <td>{{subscription?.tag | titlecase }}</td>
+              <td>{{subscription?.description | titlecase}}</td>
+              <td>
+                <div class="form-switch">
+                <input #toggleEmailNotification
+                    class="form-check-input"
+                    id="toggleEmailNotification"
+                    type="checkbox"
+                    [checked]="subscription?.email_notification"
+                    (change)="onEmailNotificationChange(subscription.rule_id, subscription.username, toggleEmailNotification.checked)">
+                </div>
+              </td>
+              <td>
+                <div class="form-switch">
+                  <input #toggleAutoTrade
+                      class="form-check-input"
+                      id="toggleEmailNotification"
+                      type="checkbox"
+                      [checked]="subscription?.auto_trade"
+                      (change)="onAutoTradeChange(subscription.rule_id, subscription.username, toggleAutoTrade.checked)">
+                  </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-center">
+    <div class="col-10">
+      <div id="ftx">
+        <h4 class="mt-5 mb-3">FTX API Key</h4>
+        <form [formGroup]="form" (ngSubmit)="onUpdate(form.value)">
+          <table class="table table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">API Key</th>
+                <th scope="col">Secret</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                  <td><input type="text" name="api_key" formControlName="api_key" class="form-control"></td>
+                  <td><input type="password" name="api_secret" formControlName="api_secret" class="form-control"></td>
+                  <td>
+                    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Add / Update</button>
+                  </td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="serverresponse">
+    <div class="row d-flex justify-content-center mt-4">
+      <div class="col-10">
+        <p *ngIf="isUpdated && emailSwitchClicked && hasServerResponse">
+          <ngb-alert type="success" [dismissible]="false">Email Update Success!</ngb-alert>
+        </p>
+        <p *ngIf="!isUpdated && emailSwitchClicked && hasServerResponse">
+          <ngb-alert type="danger" [dismissible]="false">Email Update Failed!</ngb-alert>
+        </p>
+        <p *ngIf="isUpdated && tradeSwitchClicked && hasServerResponse">
+          <ngb-alert type="success" [dismissible]="false">Auto Trade Update Success!</ngb-alert>
+        </p>
+        <p *ngIf="!isUpdated && tradeSwitchClicked && hasServerResponse">
+          <ngb-alert type="danger" [dismissible]="false">Auto Trade Update Failed!</ngb-alert>
+        </p>
+        <p *ngIf="isUpdated && ftxBtnClicked && hasServerResponse">
+          <ngb-alert type="success" [dismissible]="false">FTX API Key Updated!</ngb-alert>
+        </p>
+        <p *ngIf="!isUpdated && ftxBtnClicked && hasServerResponse">
+          <ngb-alert type="danger" [dismissible]="false">FTX API Key Update Failed!</ngb-alert>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

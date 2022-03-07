@@ -1,0 +1,17 @@
+The price action of cryptocurrencies is sensitive to twitter posts from key accounts, such as Exchanges, News,
+ Project Developers and notable influencers such as Elon Musk.
+
+Price action do react in real-time in response to tweets from these accounts. This is due to trading sentiment and the 
+presence of bots.
+
+My app allows users to subscribe to developed twitter data feeds and trade automatically upon news release.
+
+The features I have built are;
+1. Email notification and immediate coin buy when Coinbase annouces new coin listing.
+2. Email notification and immediate coin buy when Elon Musk tweets Doge.
+
+With the demo app, users can choose to subscribe to email notifications, and connect their FTX exchange API keys.
+
+References:
+https://www.coindesk.com/markets/2021/04/07/coinbase-effect-means-average-91-token-price-gain-in-5-days-messari-says/
+https://www.theguardian.com/technology/2022/jan/14/dogecoin-value-soars-after-elon-musk-says-it-will-be-accepted-for-tesla-goods
